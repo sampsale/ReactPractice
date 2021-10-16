@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React getting started</title>
+  </head>
+  <body>
+    <!-- Root container for react components -->
+    <div id='result'></div>
+    <div id='root'></div>
+ 
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+
+  function HelloName(){
+      const [name, setName] = React.useState('');
+      const [age, setAge] = React.useState('');
+
+      const changename = (event) =>{
+        setName(event.target.value);
+      };
+      const changeAge = (event) =>{
+        setAge(event.target.value);
+      };
+      const checkAge = (event) =>{
+        event.preventDefault();
+        if (isNaN(age)==true){
+          ReactDOM.render(`Please insert numerical value for age`,document.getElementById('result'));
+        }
+        else {
+            if (age>=18 ){
+            ReactDOM.render(`Hello ${name}`,document.getElementById('result'));
+          } else if (age<18) {
+            ReactDOM.render('You are too young',document.getElementById('result'));
+          }
+        }
+        
+      };
+
+    return(
+       <div>
+        <form onSubmit={checkAge}>
+        <br></br>
+        <label>
+             Name:
+            <input type="text" name="name" value={name} onChange={changename}/>
+        </label>
+        <br></br>
+        <label>
+            Age:
+            <input type="text" name="age" value={age} onChange={changeAge}/>
+        </label>          
+        <br></br>
+          <input type="submit" value = "Submit"/>
+        </form>
+      </div>
+      );
+      
+    };    
+
+//  ReactDOM.render(<CheckAge/>, document.getElementById('result'));
+  ReactDOM.render(<HelloName/>, document.getElementById('root'));
+      
+    
+    </script>
+  </body>
+</html>
