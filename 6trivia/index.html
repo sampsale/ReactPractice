@@ -6,13 +6,40 @@
   </head>
   <body>
     <!-- Root container for react components -->
-    <div id='root'></div>
- 
+    <div id='question'></div>
+    <div id='button'></div>
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 
     <script type="text/babel">
+   
+    const GetButton = () =>{
+      const [question, setQuestion] = React.useState("");
+
+      React.useEffect(() =>{
+        ReactDOM.render(question, document.getElementById("question"))
+      },);
+
+      const FetchQuestion = (event) =>{
+      fetch("https://opentdb.com/api.php?amount=1")
+        .then(response=>response.json())
+        .then(responseBody=>{
+          console.log(responseBody)
+          console.log(responseBody.results[0].question)
+          setQuestion(responseBody.results[0].question)
+          })
+    }
+      return (
+      <div><button onClick={FetchQuestion}   
+      >New question</button></div>
+      )          
+    }
+    
+    
+
+
+    ReactDOM.render(<GetButton/>, document.getElementById("button"))
     </script>
   </body>
 </html>

@@ -13,6 +13,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 
     <script type="text/babel">
+
+    const GetWeatherData = () => {
+      const [location, setLocation] = React.useState('');
+      const [weather, setWeather] = React.useState({temperature: '', weathermain:'', imageurl:''}) 
+      
+    
+
+      React.useEffect(()=>{
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=Helsinki&APPID=d1d50384a434f5c85b4df056f3b78bfa`)
+        .then(response => response.json())
+        .then(responseData=>{
+          console.log(responseData.main.temp);
+          console.log(responseData.weather[0].main);
+          console.log(responseData.weather[0].icon);
+          setWeather({temperature: (responseData.main.temp-273.15).toFixed(2),
+          weathermain: responseData.weather[0].main,
+          imageurl: `https://openweathermap.org/img/wn/${responseData.weather[0].icon}@2x.png`
+          })
+        
+        })
+        .catch(err=>console.log(".catch error!"));
+      },[]);
+      console.log(weather);
+
+      return (
+        <div>
+        Weather in Helsinki:
+        <br/>Temperature: {weather.temperature} Celsius
+        <br/>Weather: {weather.weathermain}
+        <br/><img src={weather.imageurl}/>
+        </div>
+        )
+    }
+
+
+    ReactDOM.render(<GetWeatherData/>, document.getElementById('root'));
     </script>
   </body>
 </html>
