@@ -30,8 +30,8 @@
 
 
       const itemRows = repoData
-        .map((repo, index)=>
-        <tr key={index}>
+        .map((repo)=>
+        <tr key={repo.id}>
           <td>{repo.full_name}</td>
           <td><a href={repo.url}>{repo.url}</a></td>
         </tr>
