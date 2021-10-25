@@ -1,0 +1,32 @@
+table {
+  margin-left:auto; 
+  margin-right:auto;
+  border-collapse: collapse;
+}
+
+table, td, th{
+  border: 2px solid green;
+}
+
+input {
+padding: 5px;
+}
+
+button {
+  width: 10vw;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+
+.input {
+  width:10vw;
+}
+
+.input#delete {
+  font-weight: bold;
+}
